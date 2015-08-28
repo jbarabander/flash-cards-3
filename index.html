@@ -21,39 +21,34 @@
         <div class="question">
           <label>Question</label>
           <input type='text' name = "question" ng-model='newCard.question' required ng-minlength="15"/>
-        </div>
-        <div role="alert">
-          <span class="error" ng-show="qRequired">
+          <span class="error" ng-show="newCardForm.question.$error.required">
             Required!
           </span>
-          <span class="error" ng-show="minQLength">
+          <span class="error" ng-show="newCardForm.question.$error.minlength">
             Too short!
           </span>
         </div>
+
         <div class="categories">
           <label>Categories</label>
           <select ng-model='newCard.category' name='category' required>
             <option name = "category" ng-repeat='category in categories'>{{ category }}</option>
           </select>
-          <div role="alert">
             <span class="error" ng-show="newCardForm.category.$error.required">
               Required!
             </span>
-          </div>
         </div>
         <div class="answers">
           <label>Answers</label>
           <li ng-repeat="answer in newCard.answers track by $index">
           <input type="text" ng-model="answer.text" ng-maxlength="40" name='answer{{$index}}'></input>
           <input type="checkbox" ng-model="answer.correct"></input>
-          <div role="alert">
             <span class="error" ng-show="newCardForm.answer{{$index}}.$error.maxlength">
               Answer is too long!
             </span>
-          </div>
           </li>
         </div>
-        <button type='submit' class='btn-primary' ng-click = "validate()">Submit</button>
+        <button type='submit' class='btn-primary'>Submit</button>
         <button type = "reset" ng-click = "reset()">Reset</button>
       <pre>{{newCard | json}}</pre>
       </form>
