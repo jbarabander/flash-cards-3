@@ -1,12 +1,10 @@
 app.factory('FlashCardsFactory', function($http) {
-
   var categories = [
     'MongoDB',
     'Express',
     'Angular',
     'Node'
   ];
-
   function getFlashCards (category) {
     var config = {};
     if (category) config.params = { category: category };
@@ -14,8 +12,12 @@ app.factory('FlashCardsFactory', function($http) {
       return response.data;
     });
   }
+  function addFlashCard(flashCardObj) {
+    return $http.post('/cards/', flashCardObj)
+  }
   return {
     getFlashCards: getFlashCards,
-    categories: categories
+    categories: categories,
+    addFlashCard: addFlashCard,
   };
 });

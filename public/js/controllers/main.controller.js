@@ -1,8 +1,12 @@
 app.controller('MainController', function ($scope, FlashCardsFactory, $log, ScoreFactory) {
 
   $scope.categories = FlashCardsFactory.categories;
-  $scope.selectedCategory;
-
+  $scope.selectedCategory = null;
+  $scope.$on("newCardAdded", function(event,card){
+    console.log("Word");
+    $scope.flashCards.push(card);
+    $scope.getCategoryCards($scope.selectedCategory);
+  });
   $scope.getCategoryCards = function (category) {
     $scope.loading = true;
     FlashCardsFactory.getFlashCards(category).then(function(cards){
