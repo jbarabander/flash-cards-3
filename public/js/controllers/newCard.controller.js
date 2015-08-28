@@ -16,7 +16,7 @@ app.controller('NewCardController', function($scope, FlashCardsFactory) {
   }
   $scope.reset();
   $scope.addFlashCard = function(card) {
-    if(flag) return;
+    if($scope.newCardForm.$invalid) return;
     FlashCardsFactory.addFlashCard(card).then(function(success) {
       $scope.reset();
       $scope.$root.$broadcast("newCardAdded",card);
