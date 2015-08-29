@@ -7,10 +7,10 @@ var app = express(); // Create an express app!
 module.exports = app; // Export it so it can be require('')'d
 
 // The path of our public directory. ([ROOT]/public)
-var publicPath = path.join(__dirname, '../public');
+var publicPath = path.join(__dirname, '../frontend');
 
 // The path of our index.html file. ([ROOT]/index.html)
-var indexHtmlPath = path.join(__dirname, '../index.html');
+var indexHtmlPath = path.join(__dirname, '../frontend/index.html');
 
 // http://nodejs.org/docs/latest/api/globals.html#globals_dirname
 // for more information about __dirname
@@ -35,41 +35,41 @@ app.use(function (req, res, next) {
 	next();
 });
 
-app.get('/cards', function (req, res) {
-
-    var modelParams = {};
-
-    if (req.query.category) {
-    	modelParams.category = req.query.category;
-    }
-
-    FlashCardModel.find(modelParams, function (err, cards) {
-        setTimeout(function () {
-            res.send(cards);
-        }, 500 + Math.random() * 1000);
-    });
-
-});
-app.post('/cards', function (req, res, next) {
-    var card = req.body;
-    FlashCardModel.create(req.body).then(function(result) {
-      res.json(result);
-    }).then(null,next)
-    // var modelParams = {};
-    //
-    // if (req.query.category) {
-    // 	modelParams.category = req.query.category;
-    // }
-    //
-    // FlashCardModel.find(modelParams, function (err, cards) {
-    //     setTimeout(function () {
-    //         res.send(cards);
-    //     }, 500 + Math.random() * 1000);
-    // });
-
-});
-
-app.use('/',function(error, req, res, next) {
-  console.error(error);
-  res.end();
-});
+// app.get('/cards', function (req, res) {
+//
+//     var modelParams = {};
+//
+//     if (req.query.category) {
+//     	modelParams.category = req.query.category;
+//     }
+//
+//     FlashCardModel.find(modelParams, function (err, cards) {
+//         setTimeout(function () {
+//             res.send(cards);
+//         }, 500 + Math.random() * 1000);
+//     });
+//
+// });
+// app.post('/cards', function (req, res, next) {
+//     var card = req.body;
+//     FlashCardModel.create(req.body).then(function(result) {
+//       res.json(result);
+//     }).then(null,next)
+//     // var modelParams = {};
+//     //
+//     // if (req.query.category) {
+//     // 	modelParams.category = req.query.category;
+//     // }
+//     //
+//     // FlashCardModel.find(modelParams, function (err, cards) {
+//     //     setTimeout(function () {
+//     //         res.send(cards);
+//     //     }, 500 + Math.random() * 1000);
+//     // });
+//
+// });
+//
+// app.use('/',function(error, req, res, next) {
+//   console.error(error);
+//   res.end();
+// });
